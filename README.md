@@ -1,6 +1,32 @@
-# [RT-DATR:Real-time Unsupervised Domain Adaptive Detection Transformer with Adversarial Feature Learning](https://arxiv.org/abs/2504.09196)
+### [RT-DATR:Real-time Unsupervised Domain Adaptive Detection Transformer with Adversarial Feature Learning](https://arxiv.org/abs/2504.09196)
 ![image](https://github.com/user-attachments/assets/f3008521-a10f-4089-b6d5-95a21c46ec55)
+Despite domain-adaptive object detectors based on CNN and transformers have made significant progress in cross-domain detection tasks, it is regrettable that domain adaptation for real-time transformer-based detectors has not yet been explored. Directly applying existing domain adaptation algorithms has proven to be suboptimal. In this paper, we propose RT-DATR, a simple and efficient real-time domain adaptive detection transformer. Building on RT-DETR as our base detector, we first introduce a local objectlevel feature alignment module to significantly enhance the feature representation of domain invariance during object transfer. Additionally, we introduce a scene semantic feature alignment module designed to boost cross-domain detection performance by aligning scene semantic features. Finally, we introduced a domain query and decoupled it from the object query to further align the instance feature distribution within the decoder layer, reduce the domain gap, and maintain discriminative ability. Experimental results on various benchmarks demonstrate that our method outperforms current state-of-the-art approaches.
 
+## Quick Start
+```bash
+## Train
+sh run.sh or \
+
+python export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export FLAGS_START_PORT=35100
+nohup python3.7 \
+-m paddle.distributed.launch --gpus=0,1,2,3 --log_dir=log_base tools/train.py \
+-c configs/domain_adaption/da_r50_rtdetr_backbone_encoder_instance_dn_cmt_city2foggycity.yml \
+--eval \
+--enable_ce True \
+> da_rtdetr_r50_cityscapes_to_foggycity_2e4_72e_backbozne_encoder_instance_dn_cmt_loss2.txt 2>&1 &
+
+## Eval
+sh eval.sh or \
+
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+python3.7  tools/eval.py \
+-c configs/domain_adaption/da_rtdetr_r34_backbone_encoder_instance_dn_cmt_city2foggycity.yml \
+-o weights=output/o2net_cityscapes2foggycity/best_model.pdparams
+
+```
+
+## Experiments Results
 ![image](https://github.com/user-attachments/assets/26e1b8d5-d27e-4256-8e4d-b5718d9cd4be)
 
 ![image](https://github.com/user-attachments/assets/999a9fb8-b1a3-4c03-952f-13850fd3e7ea)
