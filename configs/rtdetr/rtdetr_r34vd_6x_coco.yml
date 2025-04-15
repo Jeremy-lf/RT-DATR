@@ -1,0 +1,154 @@
+_BASE_: [
+  # '../datasets/coco_detection.yml',
+  '../runtime.yml',
+  '_base_/optimizer_6x.yml',
+  '_base_/rtdetr_r50vd.yml',
+  '_base_/rtdetr_reader.yml',
+]
+
+weights: output/rtdetr_r34vd_6x_coco/model_final
+find_unused_parameters: True
+log_iter: 50
+
+# save_dir: output/rtdetr_r34vd_6x_coco_cityscapes2bdd100k
+# save_dir: output/rtdetr_r34vd_6x_coco_bdd100k2bdd100k
+# save_dir: output/rtdetr_r34vd_6x_coco_foggycityscapes2foggycityscapes
+# save_dir: output/rtdetr_r34vd_6x_coco_cityscapes2foggycityscapes_remove_dataaug
+# save_dir: output/rtdetr_r50vd_6x_coco_cityscapes2foggycityscapes
+# save_dir: output/rtdetr_r34vd_6x_coco_cityscapes2foggycityscapes_baseline
+# save_dir: output/rtdetr_r34vd_6x_coco_cityscapes2bdd100k_baseline
+
+# save_dir: output/rtdetr_r34vd_6x_coco_sim10k2cityscapes_baseline
+
+save_dir: output/rtdetr_r34vd_6x_coco_kitti2cityscapes_baseline
+
+
+pretrain_weights: https://bj.bcebos.com/v1/paddledet/models/pretrained/ResNet34_vd_pretrained.pdparams
+ResNet:
+  depth: 34
+  variant: d
+  return_idx: [1, 2, 3]
+  freeze_at: -1
+  freeze_norm: false
+  norm_decay: 0.
+  lr_mult_list: [0.1, 0.1, 0.1, 0.1]
+  num_stages: 4
+  freeze_stem_only: True
+
+HybridEncoder:
+  hidden_dim: 256
+  use_encoder_idx: [2]
+  num_encoder_layers: 1
+  encoder_layer:
+    name: TransformerLayer
+    d_model: 256
+    nhead: 8
+    dim_feedforward: 1024
+    dropout: 0.
+    activation: 'gelu'
+  expansion: 0.5
+  depth_mult: 1.0
+
+RTDETRTransformer:
+  eval_idx: -1
+  num_decoder_layers: 4
+
+
+metric: COCO
+num_classes: 1
+classwise: true
+
+
+# # CityScapes
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: leftImg8bit/train
+#   anno_path: label/cityscapes_train.json
+#   dataset_dir: data/cityscapes
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+# FoggyCityScapes
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: leftImg8bit_foggy/train
+#   anno_path: label/foggy_cityscapes_train.json
+#   dataset_dir: data/cityscapes
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+#   allow_empty: false
+
+
+# BDD100k
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: images/100k/train
+#   anno_path: annotations/bdd_daytime_train.json
+#   dataset_dir: data/bdd100k
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+#   allow_empty: false
+
+
+# KITTI
+TrainDataset:
+  name: COCODataSet
+  image_dir: image_2/
+  anno_path: annotations/kitti_train.json
+  dataset_dir: data/kitti/training
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+  allow_empty: false
+
+
+# FoggyCityscapes
+# EvalDataset:
+#   name: COCODataSet
+#   image_dir: leftImg8bit_foggy/val
+#   anno_path:  label/foggy_cityscapes_val.json
+#   dataset_dir: data/cityscapes
+#   allow_empty: false
+
+
+# Cityscapes
+# EvalDataset:
+#   name: COCODataSet
+#   image_dir: leftImg8bit/val
+#   anno_path:  label/cityscapes_val.json
+#   dataset_dir: data/cityscapes
+#   allow_empty: false
+
+# BDD100K
+# EvalDataset:
+#   name: COCODataSet
+#   image_dir: images/100k/val
+#   anno_path:  annotations/bdd_daytime_val.json
+#   dataset_dir: data/bdd100k
+#   allow_empty: false
+
+# Sim10K
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: VOC2012/JPEGImages
+#   anno_path: sim10k/sim10k_caronly_new.json
+#   dataset_dir: data
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+#   allow_empty: false
+
+# CityScapes-caronly
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: leftImg8bit/train
+#   anno_path: label/cityscapes_caronly_train.json
+#   dataset_dir: data/cityscapes
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+
+
+EvalDataset:
+  name: COCODataSet
+  image_dir: leftImg8bit/val
+  anno_path:  label/cityscapes_caronly_val.json
+  dataset_dir: data/cityscapes
+  allow_empty: false
+
+
+TestDataset:
+  name: ImageFolder
+  anno_path:  # also support txt (like VOC's label_list.txt)
+  dataset_dir:  # if set, anno_path will be 'dataset_dir/anno_path'

@@ -1,0 +1,22 @@
+metric: COCO
+num_classes: 3
+
+TrainDataset:
+  name: COCODataSet
+  image_dir: 抛洒物危险等级-train_0229
+  anno_path: 抛洒物危险等级-train_0229/train_0730_withbg02.json
+  dataset_dir: /root/paddlejob/workspace/env_run/lvfeng/output/
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+  allow_empty: true
+
+EvalDataset:
+  name: COCODataSet
+  image_dir: 抛洒物危险等级1227val
+  anno_path:  抛洒物危险等级1227val/all_val_sel_1212.json
+  dataset_dir: /root/paddlejob/workspace/env_run/lvfeng/output/
+  allow_empty: true
+
+TestDataset:
+  name: ImageFolder
+  anno_path:  # also support txt (like VOC's label_list.txt)
+  dataset_dir:  # if set, anno_path will be 'dataset_dir/anno_path'

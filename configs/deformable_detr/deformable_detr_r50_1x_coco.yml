@@ -1,0 +1,45 @@
+_BASE_: [
+  # '../datasets/coco_detection.yml',
+  '../runtime.yml',
+  '_base_/deformable_optimizer_1x.yml',
+  '_base_/deformable_detr_r50.yml',
+  '_base_/deformable_detr_reader.yml',
+]
+weights: output/deformable_detr_r50_1x_coco/model_final
+find_unused_parameters: True
+
+
+metric: COCO
+num_classes: 8
+classwise: true
+
+# Sim10K
+# TrainDataset:
+#   name: COCODataSet
+#   image_dir: VOC2012/JPEGImages
+#   anno_path: sim10k/sim10k_caronly.json
+#   dataset_dir: data
+#   data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+#   allow_empty: true
+
+# CityScapes
+TrainDataset:
+  name: COCODataSet
+  image_dir: leftImg8bit/train
+  anno_path: annotations/instances_train2017.json
+  dataset_dir: data/cityscapes
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+  allow_empty: false
+
+# BDD100K
+EvalDataset:
+  name: COCODataSet
+  image_dir: images/100k/val
+  anno_path:  annotations/bdd_daytime_val.json
+  dataset_dir: data/bdd100k
+  allow_empty: false
+
+TestDataset:
+  name: ImageFolder
+  anno_path:  # also support txt (like VOC's label_list.txt)
+  dataset_dir:  # if set, anno_path will be 'dataset_dir/anno_path'

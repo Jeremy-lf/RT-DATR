@@ -1,0 +1,45 @@
+_BASE_: [
+  '../../runtime.yml',
+  '../_base_/optimizer_80e.yml',
+  '../_base_/ppyoloe_plus_crn.yml',
+  '../_base_/ppyoloe_plus_reader.yml',
+]
+
+save_dir: output/ppyoloe_l_road
+log_iter: 100
+snapshot_epoch: 1
+weights: output/ppyoloe_plus_crn_l_60e_objects365/model_final
+pretrain_weights: https://bj.bcebos.com/v1/paddledet/models/pretrained/ppyoloe_crn_l_obj365_pretrained.pdparams
+
+CSPResNet:
+  use_alpha: False
+
+PPYOLOEHead:
+  static_assigner_epoch: 20
+
+depth_mult: 1.0
+width_mult: 1.0
+
+
+metric: COCO
+num_classes: 3
+
+TrainDataset:
+  name: COCODataSet
+  image_dir: 抛洒物危险等级-train_0229
+  anno_path: 抛洒物危险等级-train_0229/train_0731.json
+  dataset_dir: /root/paddlejob/workspace/env_run/lvfeng/output/
+  data_fields: ['image', 'gt_bbox', 'gt_class', 'is_crowd']
+  allow_empty: true
+
+EvalDataset:
+  name: COCODataSet
+  image_dir: 抛洒物危险等级1227val
+  anno_path:  抛洒物危险等级1227val/all_val_sel_1212.json
+  dataset_dir: /root/paddlejob/workspace/env_run/lvfeng/output/
+  allow_empty: true
+
+TestDataset:
+  name: ImageFolder
+  anno_path:  # also support txt (like VOC's label_list.txt)
+  dataset_dir:  # if set, anno_path will be 'dataset_dir/anno_path'
