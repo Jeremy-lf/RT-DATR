@@ -40,3 +40,13 @@ We evaluated our approach on multiple scene datasets, including weather adaptati
   <img src="https://github.com/user-attachments/assets/e3eb5b94-4014-4e31-9b08-409b1463e446" alt="" width="45%">
 </div>
 
+## Cite
+```
+@article{lv2025rt,
+  title={RT-DATR: Real-time Unsupervised Domain Adaptive Detection Transformer with Adversarial Feature Learning},
+  author={Lv, Feng and Xia, Chunlong and Wang, Shuo and Cao, Huo},
+  journal={arXiv preprint arXiv:2504.09196},
+  year={2025}
+}
+```
+
