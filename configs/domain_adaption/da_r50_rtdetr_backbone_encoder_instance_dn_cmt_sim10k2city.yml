@@ -8,7 +8,7 @@ architecture: DA_RTDETR_Backbone_Encoder_Instance
 pretrain_weights: output/rtdetr_r50vd_6x_coco_sim10k2cityscapes/53.pdparams
 norm_type: sync_bn
 
-save_dir: output/da_rtdetr_r50vd_6x_coco_sim10kcityscapes
+save_dir: output/rt_datr_r50vd_6x_coco_sim10kcityscapes
 
 use_ema: True
 ema_decay: 0.9999
