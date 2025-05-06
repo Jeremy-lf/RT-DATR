@@ -234,15 +234,7 @@ class Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN(Trainer):
                 
                 # DA
                 with model.no_sync():
-                    if self.cfg.da_method == 'o2net_detr':
-                        criterion = create('DETRLoss')
-                        outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src, \
-                            domain_outs_backbone_src, domain_labels_backbone_src, masks_src, hs_src = model(data_sup)
-                        outputs_bbox_tgt, outputs_logit_tgt, gt_bbox_tgt, gt_class_tgt, \
-                            domain_outs_backbone_tgt, domain_labels_backbone_tgt, masks_tgt, hs_tgt = model(data_unsup)
-                        losses_dict = criterion(outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src)
-                    
-                    elif self.cfg.da_method == 'o2net_rtdetr_backbone_encoder_instance_dn':
+                    if self.cfg.da_method == 'rtdetr_backbone_encoder_instance_dn':
                         criterion = create('DINOLoss')
                         outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src, \
                             dn_out_bboxes_src, dn_out_logits_src, dn_meta_src, gt_score_src, \
@@ -317,10 +309,7 @@ class Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN(Trainer):
                     
                     if scores_indices.sum():
                         pseudo = {'boxes': boxes[scores_indices]}
-                                # 'labels': labels[scores_indices]}
-                                # 'image_id': targets_tgt[0]['image_id'],
-                    #             # 'orig_size': targets_tgt[0]['orig_size'],
-                    #             # 'size': targets_tgt[0]['size']}
+
 
                     loss_da = 0
                     loss_global_da = 0
@@ -392,12 +381,7 @@ class Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN(Trainer):
                     
                     # DA total loss
                     losses_dict["loss_backbone_da"] = 1.0 * loss_da + loss_global_da
-                    # if self.cfg.da_method == 'o2net_rtdetr':
-                    #     _, N, _ = hs_src[-1].shape
-                    #     denoise_hs_src, _ = paddle.split(hs_src[-1], [N - src_num_denoising, src_num_denoising], axis=1)
-                    #     losses_dict["loss_wasserstein"] = swd(denoise_hs_src, hs_tgt[-1])
-                    # else:
-                    #     losses_dict["loss_wasserstein"] = swd(hs_src[-1], hs_tgt[-1])
+
 
                     
                     outputs = dict()
@@ -555,22 +539,3 @@ def box_to_mask(boxes, size):
             pdb.set_trace()
     
     return mask
-
-def swd(source_features, target_features, M=256):
-    batch_size = source_features.shape[0]
-    source_features = source_features.reshape([-1, source_features.shape[-1]])
-    target_features = target_features.reshape([-1, target_features.shape[-1]])
-    
-    theta = paddle.rand((M, 256)) # 256 is the feature dim
-    # theta = theta / theta.norm(2, dim=1)
-    norm = paddle.norm(theta, p=2, axis=1, keepdim=True)
-    theta = theta / norm
-    source_proj = paddle.matmul(theta, source_features.transpose([1, 0]))
-    target_proj = paddle.matmul(theta, target_features.transpose([1, 0]))
-
-    source_proj = paddle.sort(source_proj, axis=1)  
-    target_proj = paddle.sort(target_proj, axis=1)
-
-    # loss = paddle.mean(paddle.square(source_proj - target_proj))
-    loss = (source_proj - target_proj).pow(2).sum() / M / batch_size
-    return loss
