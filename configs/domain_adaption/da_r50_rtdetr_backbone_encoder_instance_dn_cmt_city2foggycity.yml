@@ -18,8 +18,7 @@ weights: output/o2net
 find_unused_parameters: True
 log_iter: 50
 
-da_method: o2net_rtdetr_backbone_encoder_instance_dn_cmt
-# da_method: o2net_rtdetr_backbone_encoder_instance_dn
+da_method: rtdetr_backbone_encoder_instance_dn_cmt
 
 hidden_dim: 256
 use_focal_loss: True
