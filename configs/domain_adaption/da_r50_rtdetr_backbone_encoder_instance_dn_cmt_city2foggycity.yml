@@ -7,14 +7,14 @@ architecture: DA_RTDETR_Backbone_Encoder_Instance
 pretrain_weights: output/rtdetr_r50vd_6x_coco_cityscapes2foggycityscapes/best_model.pdparams
 norm_type: sync_bn
 
-save_dir: output/da_rtdetr_r50vd_6x_coco_cityscapes2foggycityscapes
+save_dir: output/rt_datr_r50vd_6x_coco_cityscapes2foggycityscapes
 
 use_ema: True
 ema_decay: 0.9999
 ema_decay_type: "exponential"
 ema_filter_no_grad: True
 
-weights: output/o2net
+weights: output/
 find_unused_parameters: True
 log_iter: 50
 
