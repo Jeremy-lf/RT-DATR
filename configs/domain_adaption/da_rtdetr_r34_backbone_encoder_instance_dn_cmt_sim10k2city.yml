@@ -4,24 +4,23 @@ _BASE_: [
 
 architecture: DA_RTDETR_Backbone_Encoder_Instance
 
-# pretrain_weights: https://bj.bcebos.com/v1/paddledet/models/pretrained/ResNet34_vd_pretrained.pdparams
-# pretrain_weights:  output/rtdetr_r34vd_6x_coco_cityscapes2bdd100k_baseline/best_model.pdparams #30.pdparams  #cityscapes2foggycityscapes
+
 pretrain_weights: output/rtdetr_r34vd_6x_coco_sim10k2cityscapes_baseline/best_model.pdparams
 
 norm_type: sync_bn
 
-save_dir: output/da_sim10k2cityscapes
+save_dir: output/sim10k2cityscapes
 
 use_ema: True
 ema_decay: 0.9999
 ema_decay_type: "exponential"
 ema_filter_no_grad: True
 
-weights: output/o2net
+weights: output/
 find_unused_parameters: True
 log_iter: 50
 
-da_method: o2net_rtdetr_backbone_encoder_instance_dn_cmt
+da_method: rtdetr_backbone_encoder_instance_dn_cmt
 
 hidden_dim: 256
 use_focal_loss: True
