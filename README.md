@@ -6,6 +6,9 @@ Despite domain-adaptive object detectors based on CNN and transformers have made
 
 ## Quick Start
 ```bash
+## Enveriments
+pip install -r requeriment.txt
+
 ## Train
 sh run.sh or \
 
@@ -16,7 +19,7 @@ nohup python3.7 \
 -c configs/domain_adaption/da_r50_rtdetr_backbone_encoder_instance_dn_cmt_city2foggycity.yml \
 --eval \
 --enable_ce True \
-> da_rtdetr_r50_cityscapes_to_foggycity_2e4_72e_backbozne_encoder_instance_dn_cmt_loss2.txt 2>&1 &
+> rt_datr_r50_cityscapes_to_foggycity_2e4_72e_backbozne_encoder_instance_dn_cmt_loss2.txt 2>&1 &
 
 ## Eval
 sh eval.sh or \
@@ -24,7 +27,7 @@ sh eval.sh or \
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 python3.7  tools/eval.py \
 -c configs/domain_adaption/da_rtdetr_r34_backbone_encoder_instance_dn_cmt_city2foggycity.yml \
--o weights=output/o2net_cityscapes2foggycity/best_model.pdparams
+-o weights=output/cityscapes2foggycity/best_model.pdparams
 
 ```
 
