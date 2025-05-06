@@ -16,7 +16,7 @@ ema_decay: 0.9999
 ema_decay_type: "exponential"
 ema_filter_no_grad: True
 
-weights: output/o2net
+weights: output/
 find_unused_parameters: True
 log_iter: 50
 
