@@ -234,15 +234,7 @@ class Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN_CMT(Trainer):
                 
                 # DA
                 with model.no_sync():
-                    if self.cfg.da_method == 'o2net_detr':
-                        criterion = create('DETRLoss')
-                        outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src, \
-                            domain_outs_backbone_src, domain_labels_backbone_src, masks_src, hs_src = model(data_sup)
-                        outputs_bbox_tgt, outputs_logit_tgt, gt_bbox_tgt, gt_class_tgt, \
-                            domain_outs_backbone_tgt, domain_labels_backbone_tgt, masks_tgt, hs_tgt = model(data_unsup)
-                        losses_dict = criterion(outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src)
-                    
-                    elif self.cfg.da_method == 'o2net_rtdetr_backbone_encoder_instance_dn_cmt':
+                    if self.cfg.da_method == 'rtdetr_backbone_encoder_instance_dn_cmt':
                         criterion = create('DINOLoss')
                         outputs_bbox_src, outputs_logit_src, gt_bbox_src, gt_class_src, \
                             dn_out_bboxes_src, dn_out_logits_src, dn_meta_src, gt_score_src, \
