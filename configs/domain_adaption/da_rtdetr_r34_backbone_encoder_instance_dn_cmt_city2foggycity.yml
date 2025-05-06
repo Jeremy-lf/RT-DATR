@@ -9,7 +9,7 @@ pretrain_weights:  best_model.pdparams  #cityscapes2foggycityscapes
 
 norm_type: sync_bn
 
-save_dir: output/o2net_cityscapes2foggycity
+save_dir: output/cityscapes2foggycity
 
 use_ema: True
 ema_decay: 0.9999
