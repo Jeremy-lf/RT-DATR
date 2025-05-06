@@ -343,10 +343,7 @@ class Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN_CMT(Trainer):
                     
                     if scores_indices.sum():
                         pseudo = {'boxes': boxes[scores_indices]}
-                                # 'labels': labels[scores_indices]}
-                                # 'image_id': targets_tgt[0]['image_id'],
-                    #             # 'orig_size': targets_tgt[0]['orig_size'],
-                    #             # 'size': targets_tgt[0]['size']}
+
 
                     loss_da = 0
                     loss_global_da = 0
@@ -575,22 +572,3 @@ def box_to_mask(boxes, size):
             pdb.set_trace()
     
     return mask
-
-def swd(source_features, target_features, M=256):
-    batch_size = source_features.shape[0]
-    source_features = source_features.reshape([-1, source_features.shape[-1]])
-    target_features = target_features.reshape([-1, target_features.shape[-1]])
-    
-    theta = paddle.rand((M, 256)) # 256 is the feature dim
-    # theta = theta / theta.norm(2, dim=1)
-    norm = paddle.norm(theta, p=2, axis=1, keepdim=True)
-    theta = theta / norm
-    source_proj = paddle.matmul(theta, source_features.transpose([1, 0]))
-    target_proj = paddle.matmul(theta, target_features.transpose([1, 0]))
-
-    source_proj = paddle.sort(source_proj, axis=1)
-    target_proj = paddle.sort(target_proj, axis=1)
-
-    # loss = paddle.mean(paddle.square(source_proj - target_proj))
-    loss = (source_proj - target_proj).pow(2).sum() / M / batch_size
-    return loss
