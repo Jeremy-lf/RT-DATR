@@ -47,10 +47,6 @@ from . import multi_stream_detector
 from . import clrnet
 from .da_detr import *
 from .da_rtdetr import *
-from .da_rtdetr_space import *
-from .da_rtdetr_align import *
-from .da_rtdetr_backbone import *
-from .da_rtdetr_backbone_encoder import *
 from .da_rtdetr_backbone_encoder_instance import *
 
 from .meta_arch import *
@@ -90,8 +86,4 @@ from .multi_stream_detector import *
 from .clrnet import *
 from .da_detr import *
 from .da_rtdetr import *
-from .da_rtdetr_space import *
-from .da_rtdetr_align import *
-from .da_rtdetr_backbone import *
-from .da_rtdetr_backbone_encoder import *
 from .da_rtdetr_backbone_encoder_instance import *

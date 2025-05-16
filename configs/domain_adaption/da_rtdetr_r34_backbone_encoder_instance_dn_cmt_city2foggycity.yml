@@ -5,7 +5,7 @@ _BASE_: [
 architecture: DA_RTDETR_Backbone_Encoder_Instance
 
 # pretrain_weights: https://bj.bcebos.com/v1/paddledet/models/pretrained/ResNet34_vd_pretrained.pdparams
-pretrain_weights:  best_model.pdparams  #cityscapes2foggycityscapes
+pretrain_weights:  best_model.pdparams
 
 norm_type: sync_bn
 

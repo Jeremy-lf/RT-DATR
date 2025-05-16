@@ -25,12 +25,7 @@ from . import hybrid_encoder
 from . import DA
 from . import da_deformable_transformer
 from . import da_rtdetr_transformer
-from . import da_rtdetr_transformer_space
-from . import da_rtdetr_transformer_align
-from . import da_rtdetr_transformer_instance
-from . import da_rtdetr_transformer_weak
 from . import hybrid_encoder_backbone
-from . import da_rtdetr_transformer_global
 from . import da_rtdetr_transformer_global_instance
 
 from .detr_transformer import *
@@ -47,10 +42,6 @@ from .hybrid_encoder import *
 from .DA import *
 from .da_deformable_transformer import *
 from .da_rtdetr_transformer import *
-from .da_rtdetr_transformer_space import *
 from .da_rtdetr_transformer_instance import *
-from .da_rtdetr_transformer_weak import *
-from .da_rtdetr_transformer_align import *
 from .hybrid_encoder_backbone import *
-from .da_rtdetr_transformer_global import *
 from .da_rtdetr_transformer_global_instance import *

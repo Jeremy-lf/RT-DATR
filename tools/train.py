@@ -33,15 +33,6 @@ from ppdet.core.workspace import load_config, merge_config
 
 from ppdet.engine import Trainer, TrainerCot, init_parallel_env, set_random_seed, init_fleet_env
 from ppdet.engine.trainer_ssod import Trainer_DenseTeacher, Trainer_ARSL, Trainer_Semi_RTDETR
-from ppdet.engine.trainer_da import Trainer_DA_RTDETR
-from ppdet.engine.trainer_da_dynamic import Trainer_DA_RTDETR_Space
-from ppdet.engine.trainer_da_instance import Trainer_DA_RTDETR_Instance
-from ppdet.engine.trainer_da_weak import Trainer_DA_RTDETR_Weak
-
-from ppdet.engine.trainer_da_align import Trainer_DA_RTDETR_Align
-from ppdet.engine.trainer_da_backbone import Trainer_DA_RTDETR_Backbone
-from ppdet.engine.trainer_da_backbone_encoder import Trainer_DA_RTDETR_Backbone_Encoder
-from ppdet.engine.trainer_da_backbone_encoder_instance import Trainer_DA_RTDETR_Backbone_Encoder_Instance
 
 from ppdet.engine.trainer_da_backbone_encoder_instance_dn import Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN
 from ppdet.engine.trainer_da_backbone_encoder_instance_dn_cmt import Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN_CMT
@@ -149,35 +140,12 @@ def run(FLAGS, cfg):
             trainer = Trainer_ARSL(cfg, mode='train')
         elif ssod_method == 'Semi_RTDETR':
             trainer = Trainer_Semi_RTDETR(cfg, mode='train')
-        elif da_method == 'o2net_rtdetr':
-            trainer = Trainer_DA_RTDETR(cfg, mode='train')  # Add DA-RTDETR
-        elif da_method == 'o2net_rtdetr_space':
-            trainer = Trainer_DA_RTDETR_Space(cfg, mode='train')  # Add DA-RTDETR
-        elif da_method == 'o2net_rtdetr_instance':
-            trainer = Trainer_DA_RTDETR_Instance(cfg, mode='train')  # Add DA-RTDETR
-        elif da_method == 'o2net_rtdetr_weak':
-            trainer = Trainer_DA_RTDETR_Weak(cfg, mode='train')  # Add DA-RTDETR
-
-        elif da_method == 'o2net_rtdetr_align':
-            trainer = Trainer_DA_RTDETR_Align(cfg, mode='train')  # Add DA-RTDETR
-
-        elif da_method == 'o2net_rtdetr_backbone':
-            trainer = Trainer_DA_RTDETR_Backbone(cfg, mode='train')  # Add DA-RTDETR
-
-        elif da_method == 'o2net_rtdetr_backbone_encoder':
-            trainer = Trainer_DA_RTDETR_Backbone_Encoder(cfg, mode='train')  # Add DA-RTDETR
         
-        elif da_method == 'o2net_rtdetr_backbone_encoder_instance':
-            trainer = Trainer_DA_RTDETR_Backbone_Encoder_Instance(cfg, mode='train')  # Add DA-RTDETR
-        
-        elif da_method == 'o2net_rtdetr_backbone_encoder_instance_dn':
+        elif da_method == 'rtdetr_backbone_encoder_instance_dn':
             trainer = Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN(cfg, mode='train')  # Add DA-RTDETR
         
-        elif da_method == 'o2net_rtdetr_backbone_encoder_instance_dn_cmt':
+        elif da_method == 'rtdetr_backbone_encoder_instance_dn_cmt':
             trainer = Trainer_DA_RTDETR_Backbone_Encoder_Instance_DN_CMT(cfg, mode='train')  # Add DA-RTDETR
-        
-        elif da_method == 'o2net_detr':
-            trainer = Trainer_DA_RTDETR(cfg, mode='train')  # Add DA-DEF-DETR
         else:
             raise ValueError(
                 "Semi-Supervised Object Detection only no support this method.")

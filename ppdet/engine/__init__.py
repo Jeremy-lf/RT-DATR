@@ -36,42 +36,6 @@ from . import trainer_ssod
 from .trainer_ssod import *
 __all__ = __all__ + trainer_ssod.__all__
 
-from . import trainer_da
-from .trainer_da import *
-__all__ = __all__ + trainer_da.__all__
-
-from . import trainer_da_dynamic
-from .trainer_da_dynamic import *
-__all__ = __all__ + trainer_da_dynamic.__all__
-
-
-from . import trainer_da_weak
-from .trainer_da_weak import *
-__all__ = __all__ + trainer_da_weak.__all__
-
-from . import trainer_da_instance
-from .trainer_da_instance import *
-__all__ = __all__ + trainer_da_instance.__all__
-
-from . import trainer_da_align
-from .trainer_da_align import *
-__all__ = __all__ + trainer_da_align.__all__
-
-
-from . import trainer_da_backbone
-from .trainer_da_backbone import *
-__all__ = __all__ + trainer_da_backbone.__all__
-
-
-from . import trainer_da_backbone_encoder
-from .trainer_da_backbone_encoder import *
-__all__ = __all__ + trainer_da_backbone_encoder.__all__
-
-
-from . import trainer_da_backbone_encoder_instance
-from .trainer_da_backbone_encoder_instance import *
-__all__ = __all__ + trainer_da_backbone_encoder_instance.__all__
-
 from . import trainer_da_backbone_encoder_instance_dn
 from .trainer_da_backbone_encoder_instance_dn import *
 __all__ = __all__ + trainer_da_backbone_encoder_instance_dn.__all__

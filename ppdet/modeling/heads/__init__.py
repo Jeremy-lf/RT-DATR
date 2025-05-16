@@ -43,8 +43,6 @@ from . import vitpose_head
 from . import clrnet_head
 from . import da_detr_head
 from . import da_dino_head
-from . import da_dino_head_space
-from . import da_dino_head_align
 from . import da_dino_head_encoder_instance
 
 
@@ -80,6 +78,4 @@ from .vitpose_head import *
 from .clrnet_head import *
 from .da_detr_head import *
 from .da_dino_head import *
-from .da_dino_head_space import *
-from .da_dino_head_align import *
 from .da_dino_head_encoder_instance import *

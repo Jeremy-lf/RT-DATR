@@ -4,7 +4,9 @@ _BASE_: [
 
 architecture: DA_RTDETR_Backbone_Encoder_Instance
 
-pretrain_weights: output/rtdetr_r50vd_6x_coco_cityscapes2foggycityscapes/best_model.pdparams
+pretrain_weights: https://paddledet.bj.bcebos.com/models/pretrained/ResNet50_vd_ssld_v2_pretrained.pdparams
+# pretrain_weights: output/rtdetr_r50vd_6x_coco_cityscapes2foggycityscapes/best_model.pdparams
+
 norm_type: sync_bn
 
 save_dir: output/rt_datr_r50vd_6x_coco_cityscapes2foggycityscapes
