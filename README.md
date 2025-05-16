@@ -12,7 +12,7 @@ pip install -r requeriments.txt
 ## Train
 sh run.sh or \
 
-python export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
+export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 export FLAGS_START_PORT=35100
 python3.7 \
 -m paddle.distributed.launch --gpus=0,1,2,3 --log_dir=log_base tools/train.py \
@@ -42,7 +42,7 @@ We evaluated our approach on multiple scene datasets, including weather adaptati
   <img src="https://github.com/user-attachments/assets/e3eb5b94-4014-4e31-9b08-409b1463e446" alt="" width="45%">
 </div>
 
-## Cite
+## Citation
 ```
 @article{lv2025rt,
   title={RT-DATR: Real-time Unsupervised Domain Adaptive Detection Transformer with Adversarial Feature Learning},
