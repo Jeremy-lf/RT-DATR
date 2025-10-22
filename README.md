@@ -39,7 +39,8 @@ We evaluated our approach on multiple scene datasets, including weather adaptati
 
 ![image](https://github.com/user-attachments/assets/26e1b8d5-d27e-4256-8e4d-b5718d9cd4be)
 
-![image](https://github.com/user-attachments/assets/999a9fb8-b1a3-4c03-952f-13850fd3e7ea)
+<img width="1604" height="608" alt="image" src="https://github.com/user-attachments/assets/bb45baaa-7a4f-42f6-ac87-b479aa5f3507" />
+
 
 <div style="display: flex; gap: 20px;justify-content: center; margin-bottom: 20px;">
   <img src="https://github.com/user-attachments/assets/fd862dbf-aef8-44f1-99ba-8792a8f09ba3" alt="" width="45%">
